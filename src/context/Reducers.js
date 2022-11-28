@@ -15,11 +15,16 @@ export const cartReducer = (state, action) => {
         ),
       };
     case "UPDATE":
-      console.log(action);
       return {
         ...state,
         products: action.payload.products,
         services: action.payload.services,
+      };
+    case "CHANGE_LOGIN":
+      console.log(action);
+      return {
+        ...state,
+        isLogin: action.payload.state,
       };
     default:
       return state;

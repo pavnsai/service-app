@@ -1,6 +1,6 @@
 import { FaShoppingCart, FaSignInAlt } from "react-icons/fa";
 import { AiFillDelete, AiTwotoneHome } from "react-icons/ai";
-
+import { RiLogoutCircleRFill } from "react-icons/ri";
 import {
   Badge,
   Button,
@@ -13,14 +13,40 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { CartState } from "../context/Context";
 import "./styles.css";
+import { Auth } from "aws-amplify";
+import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const Header = () => {
   const {
-    state: { cart },
+    state: { cart, isLogin },
     dispatch,
     productDispatch,
   } = CartState();
+  const history = useHistory();
+  const [loggedIn, setloggedIn] = useState(false);
+  useEffect(() => {
+    setloggedIn(isLogin);
+  }, [isLogin]);
 
+  async function signOut() {
+    try {
+      await Auth.signOut();
+      setloggedIn(false);
+      history.push({
+        pathname: "/",
+      });
+      dispatch({
+        type: "CHANGE_LOGIN",
+        payload: {
+          state: false,
+        },
+      });
+      console.log("sined out");
+    } catch (error) {
+      console.log("error signing out: ", error);
+    }
+  }
   return (
     <Navbar bg="dark" variant="dark" style={{ height: 80 }}>
       <Container>
@@ -51,10 +77,20 @@ const Header = () => {
           </Navbar.Text>
         )}
         <Navbar.Brand>
-          <Link to="/login">
-            {" "}
-            <FaSignInAlt color="white" fontSize="40px" /> Login
-          </Link>
+          {" "}
+          {loggedIn ? (
+            <Link onClick={signOut}>
+              <div>
+                <RiLogoutCircleRFill color="white" fontSize="40px" /> Logout
+              </div>
+            </Link>
+          ) : (
+            <Link to="/login">
+              <div>
+                <FaSignInAlt color="white" fontSize="40px" /> Login
+              </div>
+            </Link>
+          )}
         </Navbar.Brand>
         <Nav>
           <Dropdown>

@@ -5,6 +5,14 @@ import Home from "./components/Home";
 import Cart from "./components/Cart";
 import ServicePage from "./components/ServicePage";
 import React from "react";
+import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
+import "@aws-amplify/ui-react/styles.css";
+import awsconfig from "./aws-exports";
+import { Amplify, Auth, API, graphqlOperation } from "aws-amplify";
+import CheckOut from "./components/CheckOut";
+import DummySignInPage from "./components/DummySignInPage";
+
+Amplify.configure(awsconfig);
 
 function App() {
   return (
@@ -19,6 +27,12 @@ function App() {
         </Route>
         <Route path="/cart">
           <Cart />
+        </Route>
+        <Route path="/checkout">
+          <CheckOut />
+        </Route>
+        <Route path="/login">
+          <DummySignInPage />
         </Route>
       </div>
     </BrowserRouter>

@@ -3,6 +3,8 @@ import { Button, Col, Form, Image, ListGroup, Row } from "react-bootstrap";
 import { AiFillDelete } from "react-icons/ai";
 import { CartState } from "../context/Context";
 import Rating from "./Rating";
+import { useHistory } from "react-router-dom";
+import { Auth } from "aws-amplify";
 
 const Cart = () => {
   const {
@@ -10,12 +12,37 @@ const Cart = () => {
     dispatch,
   } = CartState();
   const [total, setTotal] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     setTotal(
       cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0)
     );
   }, [cart]);
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser({
+      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    })
+      .then((user) => {
+        dispatch({
+          type: "CHANGE_LOGIN",
+          payload: {
+            state: true,
+          },
+        });
+        console.log(user);
+      })
+      .catch((err) => {
+        dispatch({
+          type: "CHANGE_LOGIN",
+          payload: {
+            state: false,
+          },
+        });
+        console.log(err);
+      });
+  }, []);
 
   return (
     <div className="home">
@@ -75,7 +102,18 @@ const Cart = () => {
       <div className="filters summary">
         <span className="title">Subtotal ({cart.length}) items</span>
         <span style={{ fontWeight: 700, fontSize: 20 }}>Total: ₹ {total}</span>
-        <Button type="button" disabled={cart.length === 0}>
+        <Button
+          type="button"
+          disabled={cart.length === 0}
+          onClick={() => {
+            history.push({
+              pathname: "/checkout",
+              state: {
+                data: "jds",
+              },
+            });
+          }}
+        >
           Proceed to Checkout
         </Button>
       </div>

@@ -4,6 +4,7 @@ import SingleProduct from "./SingleProduct";
 import { useHistory, useLocation } from "react-router-dom";
 import Model from "./Model";
 import { useState } from "react";
+// header.tsx
 
 const Home = () => {
   const {
@@ -54,6 +55,7 @@ const Home = () => {
     console.log(data);
     setModalOpen(true);
     setmodalData(data);
+
     console.log("ji");
   };
   const handleClickfromModal = () => {
