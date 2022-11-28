@@ -7,7 +7,7 @@ import {
 } from "react";
 // import { faker } from "@faker-js/faker";
 import faker from "faker";
-
+import axios from "axios";
 import { cartReducer, productReducer } from "./Reducers";
 import { Auth } from "aws-amplify";
 
@@ -19,6 +19,22 @@ const Context = ({ children }) => {
   let temp = false;
   useEffect(() => {
     console.log("updating");
+    async function fetchData() {
+      await axios
+        .post(
+          "https://thucsi4ibdq7iqsbulp7fhbexu0dmaah.lambda-url.us-east-1.on.aws/",
+          {}
+        )
+        .then(
+          (res) => {
+            console.log(res);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
+    fetchData();
     dispatch({
       type: "UPDATE",
       payload: {
@@ -287,6 +303,7 @@ const Context = ({ children }) => {
     services: [],
     cart: [],
     isLogin: temp,
+    modal: false,
   });
   const [productState, productDispatch] = useReducer(productReducer, {
     byStock: false,

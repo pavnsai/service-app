@@ -31,6 +31,11 @@ export const cartReducer = (state, action) => {
         ...state,
         cart: [],
       };
+    case "CHANGE_MODAL":
+      return {
+        ...state,
+        modal: action.payload.modal,
+      };
     default:
       return state;
   }

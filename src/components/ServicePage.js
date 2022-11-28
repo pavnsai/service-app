@@ -9,11 +9,13 @@ import { useHistory, useLocation } from "react-router-dom";
 
 const ServicePage = () => {
   const {
-    state: { products, services },
+    state: { products, services, modal },
+    dispatch,
     productState: { sort, byStock, byFastDelivery, byRating, searchQuery },
   } = CartState();
-  const location = useLocation();
-  const prop = location.state?.data?.value;
+  // const location = useLocation();
+  // console.log(location);
+  // const prop = location.state?.data?.openModal;
   const [modalOpen, setModalOpen] = useState(false);
   const transformProducts = () => {
     let sortedProducts = products;
@@ -48,6 +50,14 @@ const ServicePage = () => {
   };
 
   useEffect(() => {
+    // if (prop) {
+    //   console.log(prop);
+    //   setModalOpen(true);
+    // }
+    // updateServices(arr);
+    setModalOpen(modal);
+  }, [modal]);
+  useEffect(() => {
     // console.log("inside");
     const arr = [
       {
@@ -66,12 +76,21 @@ const ServicePage = () => {
         image: "http://placeimg.com/640/480/food",
       },
     ];
-    if (prop) setModalOpen(true);
+    // if (prop) {
+    //   console.log(prop);
+    //   setModalOpen(true);
+    // }
     // updateServices(arr);
   }, []);
   const handleClickfromModal = () => {
     console.log("hello from modal");
-    setModalOpen(false);
+    dispatch({
+      type: "CHANGE_MODAL",
+      payload: {
+        modal: false,
+      },
+    });
+    // setModalOpen(false);
   };
   return (
     <div>

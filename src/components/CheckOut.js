@@ -24,11 +24,14 @@ const CheckOut = () => {
         state: true,
       },
     });
+    dispatch({
+      type: "CHANGE_MODAL",
+      payload: {
+        modal: true,
+      },
+    });
     history.push({
       pathname: "/",
-      state: {
-        data: { value: true },
-      },
     });
   }, []);
 
