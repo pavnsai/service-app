@@ -9,12 +9,14 @@ import {
 import faker from "faker";
 
 import { cartReducer, productReducer } from "./Reducers";
+import { Auth } from "aws-amplify";
 
 const Cart = createContext();
 faker.seed(99);
 
 const Context = ({ children }) => {
   const [products, updateProducts] = useState([]);
+  let temp = false;
   useEffect(() => {
     console.log("updating");
     dispatch({
@@ -243,6 +245,26 @@ const Context = ({ children }) => {
         ],
       },
     });
+    Auth.currentAuthenticatedUser({
+      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    })
+      .then((user) => {
+        dispatch({
+          type: "CHANGE_LOGIN",
+          payload: {
+            state: true,
+          },
+        });
+      })
+      .catch((err) => {
+        dispatch({
+          type: "CHANGE_LOGIN",
+          payload: {
+            state: false,
+          },
+        });
+        console.log(err);
+      });
   }, []);
 
   // const products = [...Array(20)].map(() => ({
@@ -264,17 +286,14 @@ const Context = ({ children }) => {
     products: products,
     services: [],
     cart: [],
-    isLogin: false,
+    isLogin: temp,
   });
-  console.log(state);
   const [productState, productDispatch] = useReducer(productReducer, {
     byStock: false,
     byFastDelivery: false,
     byRating: 0,
     searchQuery: "",
   });
-
-  console.log(productState);
 
   return (
     <Cart.Provider value={{ state, dispatch, productState, productDispatch }}>

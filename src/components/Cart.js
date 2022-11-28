@@ -15,8 +15,32 @@ const Cart = () => {
   const history = useHistory();
 
   useEffect(() => {
+    const roads = [
+      {
+        id: "d7a48efe-434f-41d6-b8d1-a5d64fbf3156",
+        name: "Handmade Soft Salad",
+        price: "615.00",
+        image: "http://placeimg.com/640/480/nightlife",
+        typeOfService: "Hair Saloon",
+        inStock: 5,
+        fastDelivery: true,
+        ratings: 1,
+        qty: 1,
+      },
+    ];
+    let cartAmount = Number(0);
+    cart.forEach((element) => {
+      cartAmount += Number(element.qty.toString().substring(0, 1)); //* Number(element.qty.substring(0, 1));
+    });
+    console.log(cartAmount);
+    console.log(cart);
     setTotal(
-      cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0)
+      cart.reduce((acc, curr) => {
+        console.log(curr.qty);
+        return (
+          acc + Number(curr.price) * Number(curr.qty.toString().substring(0, 1))
+        );
+      }, 0)
     );
   }, [cart]);
 
@@ -65,18 +89,22 @@ const Cart = () => {
                   <Form.Control
                     as="select"
                     value={prod.qty}
-                    onChange={(e) =>
+                    onChange={(e) => {
+                      console.log(e.target.value);
                       dispatch({
                         type: "CHANGE_CART_QTY",
                         payload: {
                           id: prod.id,
                           qty: e.target.value,
                         },
-                      })
-                    }
+                      });
+                    }}
                   >
                     {[...Array(prod.inStock).keys()].map((x) => (
-                      <option key={x + 1}>{x + 1}</option>
+                      <option key={x + 1}>
+                        {x + 1}
+                        {x + 1 === 1 ? "hour" : "hours"}
+                      </option>
                     ))}
                   </Form.Control>
                 </Col>
@@ -105,6 +133,7 @@ const Cart = () => {
         <Button
           type="button"
           disabled={cart.length === 0}
+          variant="dark"
           onClick={() => {
             history.push({
               pathname: "/checkout",

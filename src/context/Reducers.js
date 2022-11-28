@@ -8,6 +8,7 @@ export const cartReducer = (state, action) => {
         cart: state.cart.filter((c) => c.id !== action.payload.id),
       };
     case "CHANGE_CART_QTY":
+      console.log(action);
       return {
         ...state,
         cart: state.cart.filter((c) =>
@@ -21,10 +22,14 @@ export const cartReducer = (state, action) => {
         services: action.payload.services,
       };
     case "CHANGE_LOGIN":
-      console.log(action);
       return {
         ...state,
         isLogin: action.payload.state,
+      };
+    case "CLEAR_CART":
+      return {
+        ...state,
+        cart: [],
       };
     default:
       return state;

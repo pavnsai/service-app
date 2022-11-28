@@ -1,11 +1,13 @@
 import { FaShoppingCart, FaSignInAlt } from "react-icons/fa";
 import { AiFillDelete, AiTwotoneHome } from "react-icons/ai";
+import { GrServices } from "react-icons/gr";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import {
   Badge,
   Button,
   Container,
   Dropdown,
+  Form,
   FormControl,
   Nav,
   Navbar,
@@ -28,7 +30,6 @@ const Header = () => {
   useEffect(() => {
     setloggedIn(isLogin);
   }, [isLogin]);
-
   async function signOut() {
     try {
       await Auth.signOut();
@@ -48,23 +49,24 @@ const Header = () => {
     }
   }
   return (
-    <Navbar bg="dark" variant="dark" style={{ height: 80 }}>
+    <Navbar bg="primary" variant="dark" style={{ height: 80 }}>
       <Container>
-        {/* <Navbar.Brand>
-          <Link to="/home">Services</Link>
+        <Navbar.Brand>
+          <GrServices color="white" fontSize="40px" />{" "}
+          <Link to="/">Service-Provider</Link>
+        </Navbar.Brand>
+        {/* <Navbar.Brand style={{ marginLeft: "0px" }}>
+          <Link to="/">Service Provider</Link>
         </Navbar.Brand> */}
         <Navbar.Brand>
-          <Link to="/">
-            {" "}
-            <AiTwotoneHome color="white" fontSize="40px" />
-          </Link>
+          <Link to="/">Home</Link>
         </Navbar.Brand>
         {!["cart", ""].includes(useLocation().pathname.split("/")[1]) && (
           <Navbar.Text className="search">
             <FormControl
               style={{ width: 500 }}
               type="search"
-              placeholder="Search a product..."
+              placeholder="Search a professional..."
               className="m-auto"
               aria-label="Search"
               onChange={(e) => {
@@ -75,19 +77,35 @@ const Header = () => {
               }}
             />
           </Navbar.Text>
+          // <Form inline>
+          //   <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+          //   <Button variant="outline-info">Search</Button>
+          // </Form>
         )}
         <Navbar.Brand>
           {" "}
           {loggedIn ? (
             <Link onClick={signOut}>
               <div>
-                <RiLogoutCircleRFill color="white" fontSize="40px" /> Logout
+                <Button
+                  style={{ width: "95%", margin: "0 10px" }}
+                  variant="danger"
+                >
+                  Logout
+                </Button>
+                {/* <RiLogoutCircleRFill color="white" fontSize="40px" /> Logout */}
               </div>
             </Link>
           ) : (
             <Link to="/login">
               <div>
-                <FaSignInAlt color="white" fontSize="40px" /> Login
+                <Button
+                  style={{ width: "95%", margin: "0 10px" }}
+                  variant="dark"
+                >
+                  Login
+                </Button>
+                {/* <FaSignInAlt color="white" fontSize="40px" /> Login */}
               </div>
             </Link>
           )}

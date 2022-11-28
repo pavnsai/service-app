@@ -25,7 +25,7 @@ const SingleProduct = ({ prod, onClickFunction }) => {
             {prod.name}
           </Card.Title>
           <Card.Subtitle style={{ paddingBottom: 10 }}>
-            <div>₹ {prod.price.split(".")[0]}</div>
+            <div>$ {prod.price.split(".")[0]}</div>
             <Rating
               rating={prod.ratings}
               onClick={(i) => {

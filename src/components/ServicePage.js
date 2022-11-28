@@ -3,13 +3,18 @@ import Filters from "./Filters";
 import SingleProduct from "./SingleProduct";
 import { CartState } from "../context/Context";
 import ServiceCard from "./ServiceCard";
+import Model from "./Model";
+import ServiceModal from "./ServiceModal";
+import { useHistory, useLocation } from "react-router-dom";
 
 const ServicePage = () => {
   const {
     state: { products, services },
     productState: { sort, byStock, byFastDelivery, byRating, searchQuery },
   } = CartState();
-  // const [services, updateServices] = useState([]);
+  const location = useLocation();
+  const prop = location.state?.data?.value;
+  const [modalOpen, setModalOpen] = useState(false);
   const transformProducts = () => {
     let sortedProducts = products;
 
@@ -61,9 +66,13 @@ const ServicePage = () => {
         image: "http://placeimg.com/640/480/food",
       },
     ];
+    if (prop) setModalOpen(true);
     // updateServices(arr);
   }, []);
-
+  const handleClickfromModal = () => {
+    console.log("hello from modal");
+    setModalOpen(false);
+  };
   return (
     <div>
       <div style={{ marginLeft: "10%" }}>
@@ -75,6 +84,9 @@ const ServicePage = () => {
             <ServiceCard prod={prod} key={prod.id} />
           ))}
         </div>
+        {modalOpen && (
+          <ServiceModal status={modalOpen} handleClick={handleClickfromModal} />
+        )}
       </div>
     </div>
   );
