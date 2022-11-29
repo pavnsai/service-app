@@ -22,7 +22,7 @@ const Context = ({ children }) => {
     async function fetchData() {
       await axios
         .post(
-          "https://thucsi4ibdq7iqsbulp7fhbexu0dmaah.lambda-url.us-east-1.on.aws/",
+          "/",
           { request: "getdata" }
         )
         .then(

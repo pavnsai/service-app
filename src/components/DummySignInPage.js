@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
 import { CartState } from "../context/Context";
 import { Auth } from "aws-amplify";
+import { Spinner } from "react-bootstrap";
 
 const DummySignInPage = () => {
   const {
@@ -49,7 +50,16 @@ const DummySignInPage = () => {
       });
   }, []);
 
-  return <div>DummySignInPage</div>;
+  return (
+    <div>
+      <Spinner
+        animation="grow"
+        style={{ marginLeft: "40%", marginTop: "10%" }}
+      />
+      <Spinner animation="grow" />
+      <Spinner animation="grow" />
+    </div>
+  );
 };
 
 export default withAuthenticator(DummySignInPage);

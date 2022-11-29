@@ -3,6 +3,7 @@ import { withAuthenticator, Button, Heading } from "@aws-amplify/ui-react";
 import { CartState } from "../context/Context";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import Spinner from "react-bootstrap/Spinner";
 
 const CheckOut = () => {
   const {
@@ -17,10 +18,7 @@ const CheckOut = () => {
   useEffect(() => {
     async function fetchData() {
       await axios
-        .post(
-          "https://thucsi4ibdq7iqsbulp7fhbexu0dmaah.lambda-url.us-east-1.on.aws/",
-          { request: "uploaddata", data: cart, userName: userName }
-        )
+        .post("/", { request: "uploaddata", data: cart, userName: userName })
         .then(
           (res) => {
             dispatch({
@@ -54,7 +52,16 @@ const CheckOut = () => {
     fetchData();
   }, []);
 
-  return <div>CheckOut</div>;
+  return (
+    <div>
+      <Spinner
+        animation="grow"
+        style={{ marginLeft: "40%", marginTop: "10%" }}
+      />
+      <Spinner animation="grow" />
+      <Spinner animation="grow" />
+    </div>
+  );
 };
 
 export default withAuthenticator(CheckOut);

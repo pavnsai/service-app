@@ -55,11 +55,8 @@ const Home = () => {
     console.log(data);
     setModalOpen(true);
     setmodalData(data);
-
-    console.log("ji");
   };
   const handleClickfromModal = () => {
-    console.log("hello from modal");
     setModalOpen(false);
   };
   return (
@@ -84,18 +81,5 @@ const Home = () => {
     </div>
   );
 };
-const ChildComponent = ({ isOpen, text, handleChange, handleClick }) => {
-  return (
-    <>
-      {isOpen && (
-        <Model
-          status={isOpen}
-          handleClick={handleClick}
-          text={text}
-          handleChange={handleChange}
-        />
-      )}
-    </>
-  );
-};
+
 export default Home;
