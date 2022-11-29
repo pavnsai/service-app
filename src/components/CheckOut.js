@@ -4,6 +4,7 @@ import { CartState } from "../context/Context";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
+import { Auth } from "aws-amplify";
 
 const CheckOut = () => {
   const {
@@ -12,21 +13,16 @@ const CheckOut = () => {
     productDispatch,
   } = CartState();
   const history = useHistory();
-  console.log(cart);
-  console.log(userName);
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchData(user) {
       await axios
-        .post("/", { request: "uploaddata", data: cart, userName: userName })
+        .post(
+          "https://thucsi4ibdq7iqsbulp7fhbexu0dmaah.lambda-url.us-east-1.on.aws/",
+          { request: "uploaddata", data: cart, userName: user }
+        )
         .then(
           (res) => {
-            dispatch({
-              type: "CHANGE_LOGIN",
-              payload: {
-                state: true,
-              },
-            });
             dispatch({
               type: "CLEAR_CART",
               payload: {
@@ -42,14 +38,45 @@ const CheckOut = () => {
             history.push({
               pathname: "/",
             });
-            console.log(res);
           },
           (error) => {
             console.log(error);
           }
         );
     }
-    fetchData();
+    Auth.currentAuthenticatedUser({
+      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    })
+      .then((user) => {
+        dispatch({
+          type: "CHANGE_USERNAME",
+          payload: {
+            userName: user.username,
+          },
+        });
+        dispatch({
+          type: "CHANGE_LOGIN",
+          payload: {
+            state: true,
+          },
+        });
+        fetchData(user.username);
+      })
+      .catch((err) => {
+        dispatch({
+          type: "CHANGE_LOGIN",
+          payload: {
+            state: false,
+          },
+        });
+        dispatch({
+          type: "CHANGE_USERNAME",
+          payload: {
+            userName: "",
+          },
+        });
+        console.log(err);
+      });
   }, []);
 
   return (

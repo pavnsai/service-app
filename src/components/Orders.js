@@ -31,15 +31,20 @@ const Orders = () => {
   const [spinner, setSpinner] = useState(true);
   useEffect(() => {
     async function fetchData(user) {
-      await axios.post("/", { request: "pastdata", userName: user }).then(
-        (res) => {
-          setData(res.data.pastData);
-          setSpinner(false);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      await axios
+        .post(
+          "https://thucsi4ibdq7iqsbulp7fhbexu0dmaah.lambda-url.us-east-1.on.aws/",
+          { request: "pastdata", userName: user }
+        )
+        .then(
+          (res) => {
+            setData(res.data.pastData);
+            setSpinner(false);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     }
     Auth.currentAuthenticatedUser({
       bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
@@ -58,7 +63,6 @@ const Orders = () => {
           },
         });
         fetchData(user.username);
-        console.log(user);
       })
       .catch((err) => {
         dispatch({

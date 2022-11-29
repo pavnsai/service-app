@@ -2,7 +2,6 @@
   "name": "services-react",
   "version": "0.1.0",
   "private": true,
-  "proxy":"https://thucsi4ibdq7iqsbulp7fhbexu0dmaah.lambda-url.us-east-1.on.aws",
   "dependencies": {
     "@aws-amplify/ui-react": "^4.0.3",
     "@testing-library/jest-dom": "^5.16.5",

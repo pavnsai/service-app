@@ -8,7 +8,7 @@ export default function Model({ handleClick, status, prod }) {
     <>
       <Modal show={status} onHide={handleClick}>
         <Modal.Header closeButton="true" closeVariant="white">
-          <Modal.Title>{prod.name}</Modal.Title>
+          <Modal.Title style={{ color: "#00008B" }}>{prod.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ height: "400px", overflowY: "auto" }}>
           <Card>
@@ -17,19 +17,31 @@ export default function Model({ handleClick, status, prod }) {
               alt={prod.name}
               src={prod.image}
             />
-            <Card.Body>
-              <Card.Title
-                style={{ cursor: "pointer" }}
-                // onClick={() => onClickFunction(prod)}
-              >
-                {prod.name}
+            <Card.Body style={{ marginLeft: "10px" }}>
+              <Card.Title>
+                <span style={{ color: "green" }}>Description: &nbsp;</span>
+                {prod.description}
               </Card.Title>
-              <Card.Subtitle style={{ paddingBottom: 10 }}>
-                <div>₹ {prod.price.split(".")[0]}</div>
-              </Card.Subtitle>
-              <div>₹ {prod.price.split(".")[0]}</div>
-              <Rating rating={prod.ratings} />
-              <div>₹ {prod.price.split(".")[0]}</div>
+              <Card.Title>
+                <span style={{ color: "green" }}>Age: &nbsp;</span>
+                {prod.age}
+              </Card.Title>
+              <Card.Title>
+                <span style={{ color: "green" }}>Education: &nbsp;</span>
+                {prod.education}
+              </Card.Title>
+              <Card.Title>
+                <span style={{ color: "green" }}>HomeTown: &nbsp;</span>
+                {prod.home}
+              </Card.Title>
+              <Card.Title>
+                <span style={{ color: "green" }}>Cost: &nbsp;</span>$
+                {prod.price.split(".")[0]}
+              </Card.Title>
+              <Card.Title>
+                <span style={{ color: "green" }}>Rating: &nbsp;</span>
+                <Rating rating={prod.ratings} />
+              </Card.Title>
             </Card.Body>
           </Card>
         </Modal.Body>

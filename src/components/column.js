@@ -100,11 +100,6 @@ export const ORDER_COLUMNS = [
     Header: "Professional Name",
     Footer: "Professional Name",
     accessor: "jsonData.name",
-    // Cell: ({ value }) => {
-    //   let jsonData = JSON.parse(value);
-    //   console.log(jsonData);
-    //   return <span>{jsonData.name}</span>;
-    // },
     disableFilters: true,
     sticky: "left",
   },
@@ -146,7 +141,6 @@ export const ORDER_COLUMNS = [
     Footer: "Total Cost",
     accessor: "jsonData",
     Cell: ({ value }) => {
-      console.log(value);
       return (
         <span>
           {Number(value.price) * Number(value.qty.toString().substring(0, 1))}

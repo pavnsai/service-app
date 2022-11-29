@@ -13,7 +13,6 @@ const Home = () => {
   } = CartState();
   const location = useLocation();
   const prop = location.state?.data?.value;
-  console.log(products);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalData, setmodalData] = useState({});
   const transformProducts = () => {
@@ -52,7 +51,6 @@ const Home = () => {
     return sortedProducts;
   };
   const handleClick = (data) => {
-    console.log(data);
     setModalOpen(true);
     setmodalData(data);
   };

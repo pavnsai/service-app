@@ -18,11 +18,10 @@ const Context = ({ children }) => {
   const [products, updateProducts] = useState([]);
   let temp = false;
   useEffect(() => {
-    console.log("updating");
     async function fetchData() {
       await axios
         .post(
-          "/",
+          "https://thucsi4ibdq7iqsbulp7fhbexu0dmaah.lambda-url.us-east-1.on.aws/",
           { request: "getdata" }
         )
         .then(
@@ -31,7 +30,6 @@ const Context = ({ children }) => {
               type: "UPDATE",
               payload: res.data,
             });
-            console.log(res);
           },
           (error) => {
             console.log(error);
@@ -74,21 +72,6 @@ const Context = ({ children }) => {
       });
   }, []);
 
-  // const products = [...Array(20)].map(() => ({
-  //   id: faker.datatype.uuid(),
-  //   name: faker.commerce.productName(),
-  //   price: faker.commerce.price(),
-  //   image: faker.random.image(),
-  //   typeOfService: faker.random.arrayElement([
-  //     "Photography",
-  //     "Electronic Repair",
-  //     "Hair Saloon",
-  //   ]),
-  //   inStock: faker.random.arrayElement([0, 3, 5, 6, 7]),
-  //   fastDelivery: faker.datatype.boolean(),
-  //   ratings: faker.random.arrayElement([1, 2, 3, 4, 5]),
-  // }));
-  console.log(products);
   const [state, dispatch] = useReducer(cartReducer, {
     products: products,
     services: [],

@@ -49,7 +49,6 @@ const Header = () => {
       history.push({
         pathname: "/",
       });
-      console.log("sined out");
     } catch (error) {
       console.log("error signing out: ", error);
     }
