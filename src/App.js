@@ -11,6 +11,7 @@ import awsconfig from "./aws-exports";
 import { Amplify, Auth, API, graphqlOperation } from "aws-amplify";
 import CheckOut from "./components/CheckOut";
 import DummySignInPage from "./components/DummySignInPage";
+import Orders from "./components/Orders";
 
 Amplify.configure(awsconfig);
 
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path="/checkout">
           <CheckOut />
+        </Route>
+        <Route path="/orders">
+          <Orders />
         </Route>
         <Route path="/login">
           <DummySignInPage />

@@ -34,14 +34,20 @@ const Header = () => {
     try {
       await Auth.signOut();
       setloggedIn(false);
-      history.push({
-        pathname: "/",
-      });
       dispatch({
         type: "CHANGE_LOGIN",
         payload: {
           state: false,
         },
+      });
+      dispatch({
+        type: "CHANGE_USERNAME",
+        payload: {
+          userName: "",
+        },
+      });
+      history.push({
+        pathname: "/",
       });
       console.log("sined out");
     } catch (error) {
@@ -61,7 +67,9 @@ const Header = () => {
         <Navbar.Brand>
           <Link to="/">Home</Link>
         </Navbar.Brand>
-        {!["cart", ""].includes(useLocation().pathname.split("/")[1]) && (
+        {!["cart", "", "orders"].includes(
+          useLocation().pathname.split("/")[1]
+        ) && (
           <Navbar.Text className="search">
             <FormControl
               style={{ width: 500 }}
@@ -82,6 +90,9 @@ const Header = () => {
           //   <Button variant="outline-info">Search</Button>
           // </Form>
         )}
+        <Navbar.Brand>
+          <Link to="/orders">Orders</Link>
+        </Navbar.Brand>
         <Navbar.Brand>
           {" "}
           {loggedIn ? (

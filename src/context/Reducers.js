@@ -31,6 +31,11 @@ export const cartReducer = (state, action) => {
         ...state,
         cart: [],
       };
+    case "CHANGE_USERNAME":
+      return {
+        ...state,
+        userName: action.payload.userName,
+      };
     case "CHANGE_MODAL":
       return {
         ...state,

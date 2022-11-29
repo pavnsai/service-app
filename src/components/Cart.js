@@ -55,6 +55,12 @@ const Cart = () => {
             state: true,
           },
         });
+        dispatch({
+          type: "CHANGE_USERNAME",
+          payload: {
+            userName: user.username,
+          },
+        });
         console.log(user);
       })
       .catch((err) => {
@@ -62,6 +68,12 @@ const Cart = () => {
           type: "CHANGE_LOGIN",
           payload: {
             state: false,
+          },
+        });
+        dispatch({
+          type: "CHANGE_USERNAME",
+          payload: {
+            userName: "",
           },
         });
         console.log(err);
