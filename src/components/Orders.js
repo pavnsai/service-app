@@ -92,7 +92,14 @@ const Orders = () => {
     </div>
   ) : data && data.length !== 0 ? (
     <Container style={{ marginTop: "20px" }}>
-      <Paginated data={data} columns={ORDER_COLUMNS} />
+      <Card style={{ width: "80%", marginLeft: "10%" }}>
+        <Card.Header>
+          <strong>Order Details</strong>
+        </Card.Header>
+        <Card.Body>
+          <Paginated data={data} columns={ORDER_COLUMNS} />
+        </Card.Body>
+      </Card>
     </Container>
   ) : (
     <Container style={{ marginTop: "10%" }}>
@@ -101,7 +108,6 @@ const Orders = () => {
           <strong>Order Details</strong>
         </Card.Header>
         <Card.Body>
-          {/* <Card.Title>Special title treatment</Card.Title> */}
           <Card.Text>You haven't Ordered anything yet!...</Card.Text>
           <Button
             variant="primary"

@@ -1,4 +1,5 @@
 import { FaShoppingCart, FaSignInAlt } from "react-icons/fa";
+import { FcSelfServiceKiosk, FcFlowChart } from "react-icons/fc";
 import { AiFillDelete, AiTwotoneHome } from "react-icons/ai";
 import { GrServices } from "react-icons/gr";
 import { RiLogoutCircleRFill } from "react-icons/ri";
@@ -54,15 +55,14 @@ const Header = () => {
     }
   }
   return (
-    <Navbar bg="primary" variant="dark" style={{ height: 80 }}>
+    <Navbar bg="dark" variant="dark" style={{ height: 80 }}>
       <Container>
         <Navbar.Brand>
-          <GrServices color="white" fontSize="40px" />{" "}
-          <Link to="/">Service-Provider</Link>
+          <FcFlowChart color="white" fontSize="50px" />{" "}
+          <Link to="/">
+            <span>Servicer</span>
+          </Link>
         </Navbar.Brand>
-        {/* <Navbar.Brand style={{ marginLeft: "0px" }}>
-          <Link to="/">Service Provider</Link>
-        </Navbar.Brand> */}
         <Navbar.Brand>
           <Link to="/">Home</Link>
         </Navbar.Brand>
@@ -84,10 +84,6 @@ const Header = () => {
               }}
             />
           </Navbar.Text>
-          // <Form inline>
-          //   <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          //   <Button variant="outline-info">Search</Button>
-          // </Form>
         )}
         <Navbar.Brand>
           <Link to="/orders">Orders</Link>
@@ -111,7 +107,7 @@ const Header = () => {
               <div>
                 <Button
                   style={{ width: "95%", margin: "0 10px" }}
-                  variant="dark"
+                  variant="warning"
                 >
                   Login
                 </Button>
@@ -141,16 +137,18 @@ const Header = () => {
                         <span>{prod.name}</span>
                         <span>₹ {prod.price.split(".")[0]}</span>
                       </div>
-                      <AiFillDelete
-                        fontSize="20px"
-                        style={{ cursor: "pointer" }}
-                        onClick={() =>
-                          dispatch({
-                            type: "REMOVE_FROM_CART",
-                            payload: prod,
-                          })
-                        }
-                      />
+                      <div className="cartItemDetail2">
+                        <AiFillDelete
+                          fontSize="20px"
+                          style={{ cursor: "pointer" }}
+                          onClick={() =>
+                            dispatch({
+                              type: "REMOVE_FROM_CART",
+                              payload: prod,
+                            })
+                          }
+                        />{" "}
+                      </div>
                     </span>
                   ))}
                   <Link to="/cart">

@@ -8,7 +8,7 @@ export default function ServiceModal({ handleClick, status }) {
     <>
       <Modal show={status} onHide={handleClick}>
         <Modal.Header closeButton="true" closeVariant="white">
-          <Modal.Title style={{ color: "green" }}>Service-Provider</Modal.Title>
+          <Modal.Title style={{ color: "green" }}>Servicer</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ height: "150px", overflowY: "auto" }}>
           <Card>

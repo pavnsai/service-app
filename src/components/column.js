@@ -122,10 +122,9 @@ export const ORDER_COLUMNS = [
     Header: "Price Per Hour",
     Footer: "Price Per Hour",
     accessor: "jsonData.price",
-    // Cell: ({ value }) => {
-    //   let jsonData = JSON.parse(value);
-    //   return <span>{jsonData.price}</span>;
-    // },
+    Cell: ({ value }) => {
+      return <span>$ {value}</span>;
+    },
   },
   {
     Header: "Type Of Service",
@@ -143,7 +142,7 @@ export const ORDER_COLUMNS = [
     Cell: ({ value }) => {
       return (
         <span>
-          {Number(value.price) * Number(value.qty.toString().substring(0, 1))}
+          ${Number(value.price) * Number(value.qty.toString().substring(0, 1))}
         </span>
       );
     },

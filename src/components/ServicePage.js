@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
 import { CartState } from "../context/Context";
 import ServiceCard from "./ServiceCard";
 import ServiceModal from "./ServiceModal";
@@ -25,19 +26,24 @@ const ServicePage = () => {
   };
   return (
     <div>
-      <div style={{ marginLeft: "10%" }}>
-        <h2>Choose the service you need</h2>
-      </div>
-      <div className="home">
-        <div className="productContainer" style={{ marginLeft: "10%" }}>
-          {services.map((prod) => (
-            <ServiceCard prod={prod} key={prod.id} />
-          ))}
+      <Container>
+        <div style={{ marginLeft: "10%", marginTop: "15px" }}>
+          <h3>Choose the service</h3>
         </div>
-        {modalOpen && (
-          <ServiceModal status={modalOpen} handleClick={handleClickfromModal} />
-        )}
-      </div>
+        <div className="home">
+          <div className="productContainer" style={{ marginLeft: "10%" }}>
+            {services.map((prod) => (
+              <ServiceCard prod={prod} key={prod.id} />
+            ))}
+          </div>
+          {modalOpen && (
+            <ServiceModal
+              status={modalOpen}
+              handleClick={handleClickfromModal}
+            />
+          )}
+        </div>
+      </Container>
     </div>
   );
 };
