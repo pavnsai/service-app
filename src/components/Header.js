@@ -1,7 +1,7 @@
 import { FaShoppingCart, FaSignInAlt } from "react-icons/fa";
 import { FcSelfServiceKiosk, FcFlowChart } from "react-icons/fc";
 import { AiFillDelete, AiTwotoneHome } from "react-icons/ai";
-import { GrServices } from "react-icons/gr";
+import { SiFreelancer } from "react-icons/si";
 import { RiLogoutCircleRFill } from "react-icons/ri";
 import {
   Badge,
@@ -58,9 +58,9 @@ const Header = () => {
     <Navbar bg="dark" variant="dark" style={{ height: 80 }}>
       <Container>
         <Navbar.Brand>
-          <FcFlowChart color="white" fontSize="50px" />{" "}
+          <SiFreelancer color="#7cfc00" fontSize="50px" />{" "}
           <Link to="/">
-            <span>Servicer</span>
+            <span>Easyfreelancemarket</span>
           </Link>
         </Navbar.Brand>
         <Navbar.Brand>
@@ -71,7 +71,7 @@ const Header = () => {
         ) && (
           <Navbar.Text className="search">
             <FormControl
-              style={{ width: 500 }}
+              style={{ width: 350 }}
               type="search"
               placeholder="Search a professional..."
               className="m-auto"
@@ -107,7 +107,7 @@ const Header = () => {
               <div>
                 <Button
                   style={{ width: "95%", margin: "0 10px" }}
-                  variant="warning"
+                  variant="success"
                 >
                   Login
                 </Button>
@@ -118,7 +118,7 @@ const Header = () => {
         </Navbar.Brand>
         <Nav>
           <Dropdown>
-            <Dropdown.Toggle variant="success">
+            <Dropdown.Toggle variant="warning">
               <FaShoppingCart color="white" fontSize="25px" />
               <Badge>{cart.length}</Badge>
             </Dropdown.Toggle>
@@ -135,7 +135,7 @@ const Header = () => {
                       />
                       <div className="cartItemDetail">
                         <span>{prod.name}</span>
-                        <span>₹ {prod.price.split(".")[0]}</span>
+                        <span>$ {prod.price.split(".")[0]}</span>
                       </div>
                       <div className="cartItemDetail2">
                         <AiFillDelete

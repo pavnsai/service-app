@@ -1,6 +1,7 @@
 import { Card, Button } from "react-bootstrap";
 import { CartState } from "../context/Context";
 import Rating from "./Rating";
+import "./prod.css";
 
 const SingleProduct = ({ prod, onClickFunction }) => {
   const {
@@ -16,13 +17,17 @@ const SingleProduct = ({ prod, onClickFunction }) => {
           className="rounded-circle shadow-4-strong"
           alt={prod.name}
           src={prod.image}
+          onClick={() => onClickFunction(prod)}
         />
         <Card.Body>
           <Card.Title
             style={{ cursor: "pointer" }}
             onClick={() => onClickFunction(prod)}
           >
-            {prod.name}
+            <p style={{ color: "green" }}>
+              {" "}
+              <a>{prod.name}</a>
+            </p>
           </Card.Title>
           <Card.Subtitle style={{ paddingBottom: 10 }}>
             <div>$ {prod.price.split(".")[0]}</div>
